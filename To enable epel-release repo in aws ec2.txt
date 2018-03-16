@@ -1,0 +1,46 @@
+Standard repositories might not provide packages that need to be installed on Centos, Red Hat Enterprise Linux (RHEL), or Amazon Linux-based distributions. Enabling the EPEL repo provides additional package installation options.
+Resolution
+Follow these steps to download, install, and enable the EPEL repo on Centos, RHEL, or Amazon Linux-based distributions:
+
+Install and enable the EPEL rpm package that corresponds to your system architecture.
+
+RHEL 7
+-------------------
+sudo yum install –y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+RHEL 6
+--------------------
+sudo yum install –y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+Centos 7 64-bit, Centos 6 64-bit, and Centos 6 32-bit
+
+sudo yum install –y epel-release
+
+Amazon Linux
+-------------------
+The EPEL repo is already installed on Amazon Linux, but it must be enabled by updating the epel.repo file. The following command illustrates the use of the vim editor to update the epel.repo file.
+
+vim /etc/yum.repos.d/epel.repo
+
+Locate and change the entry enabled=0 to enabled=1 that is located in the $basearch section of the epel.repo file.
+Save and exit the vim editor.
+Note: After making this change, press SHIFT + : [colon] to open a new command entry box in the vim editor. Type wq, and then press Enter to save changes and exit vim.
+
+Alternatively, you can use the yum-config-manager command to enable the EPEL repo on Amazon Linux without manually editing the epel.repo file:
+
+sudo yum-config-manager --enable epel
+
+Locate and change the entry enabled=0 to enabled=1 that is located in the $basearch section of the epel.repo file.
+Save and exit the vim editor.
+Note: After making this change, press SHIFT + : [colon] to open a new command entry box in the vim editor. Type wq, and then press Enter to save changes and exit vim.
+
+Alternatively, you can use the yum-config-manager command to enable the EPEL repo on Amazon Linux without manually editing the epel.repo file:
+
+sudo yum-config-manager --enable epel
+
+To verify that the EPEL repo is enabled, run the following command:
+
+sudo yum repolist
+
+EPEL should now be used to search installed packages. Optionally, if you want to ensure EPEL is being polled directly, you can attempt to install zabbix (or one of the many other applications that are available for download from the epel repository).
+
+sudo yum --enablerepo=epel install zabbix
